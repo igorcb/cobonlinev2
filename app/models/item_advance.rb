@@ -9,10 +9,14 @@ class ItemAdvance < ActiveRecord::Base
   scope :order_asc, -> { order(due_date: :asc) }
   scope :order_desc, -> { order(due_date: :desc) }
 
-  def self.items_user(user)
+  def self.items_operator(user)
     city_id = user.city_id || nil
     @clients = Client.where(city_id: city_id)
     ItemAdvance.joins(:advance).includes(:client).where("DATE(item_advances.due_date) = ? and advances.status = ? and advances.client_id in (?) ", Date.today.to_s, Advance::TypeStatus::ABERTO, @clients.ids)
+  end
+
+  def self.items_admin
+    ItemAdvance.joins(:advance).includes(:client).where("DATE(item_advances.due_date) = ? and advances.status = ?", Date.today.to_s, Advance::TypeStatus::ABERTO)
   end
 
   def baixa_parcela(date, value)

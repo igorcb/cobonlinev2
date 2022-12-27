@@ -4,9 +4,9 @@ class ItemAdvancesController < ApplicationController
 
   def index
     if current_user.admin?
-      @item_advances = ItemAdvance.joins(:advance).includes(:client).where("DATE(item_advances.due_date) = ? and advances.status = ?", Date.today.to_s, Advance::TypeStatus::ABERTO)
+      @item_advances = ItemAdvance.item_admin
     else
-      @item_advances = ItemAdvance.items_user(current_user) 
+      @item_advances = ItemAdvance.items_operator(current_user) 
     end
   end
 
