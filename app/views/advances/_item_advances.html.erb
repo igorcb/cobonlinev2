@@ -1,0 +1,37 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% if dasboard %>
+        <th><%= Advance.human_attribute_name('client') %></th>
+      <% end %>
+      <th><%= Advance.human_attribute_name('parts') %></th>
+      <th><%= Advance.human_attribute_name('due_date') %></th>
+      <th><%= Advance.human_attribute_name('price') %></th>
+      <th><%= Advance.human_attribute_name('date_payment') %></th>
+      <th><%= Advance.human_attribute_name('value_payment') %></th>
+      <th><%= Advance.human_attribute_name('dalay') %></th>
+      <th><%= Advance.human_attribute_name('note') %></th>
+      <th><%= Advance.human_attribute_name('options') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% item_advances.order_asc.each do |item| %>
+      <tr>
+        <% if dasboard %>
+          <td><%= item.advance.client.name %></td>
+        <% end %>
+        <td><%= item.parts %></td>
+        <td><%= date_br(item.due_date) %></td>
+        <td><%= item.price %></td>
+        <td><%= date_br(item.date_payment) %></td>
+        <td><%= item.value_payment %></td>
+        <td><%= item.dalay %></td>
+        <td><%= item.note %></td>
+        <td>
+          <%= link_to Advance.human_attribute_name('edit'), edit_item_advance_path(item), style: 'text-decoration: none;' if item.due_date <= Date.current && item.date_payment.present? %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
