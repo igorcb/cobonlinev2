@@ -8,10 +8,10 @@
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-              Earnings (Monthly)
+              Qtd Cliente (Diário)
             </div>
             <div class="h5 mb-0 font-weight-bold text-gray-800">
-              $40,000
+              <%= ItemAdvance.items_admin.count  %>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -28,10 +28,10 @@
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-              Earnings (Monthly)
+              Clientes Cobrados (Diário)
             </div>
             <div class="h5 mb-0 font-weight-bold text-gray-800">
-              $40,000
+              <%= ItemAdvance.items_admin.where("Date(item_advances.date_payment) = ?", Date.current).count  %>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -48,10 +48,10 @@
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-              Earnings (Monthly)
+              Total (Diário)
             </div>
             <div class="h5 mb-0 font-weight-bold text-gray-800">
-              $40,000
+              <%= ItemAdvance.items_admin.where("Date(item_advances.date_payment) = ?", Date.current).sum('item_advances.price')  %>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -68,10 +68,10 @@
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-              Earnings (Monthly)
+              Total Cobrado
             </div>
             <div class="h5 mb-0 font-weight-bold text-gray-800">
-              $40,000
+              <%= ItemAdvance.items_admin.where("Date(item_advances.date_payment) = ?", Date.current).sum('item_advances.value_payment')  %>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
