@@ -14,14 +14,24 @@ class CurrentAccountsController < ApplicationController
   end
 
   def search
-    @q = CurrentAccount.ransack(params[:q])
+    if current_user.admin?
+      @q = CurrentAccount.ransack(params[:q])
+    else
+      @query = CurrentAccount.where(city_id: current_user.city_id)
+      @q = @query.ransack(params[:q])
+    end
     @current_accounts = @q.result.paginate(:page => params[:page]).order(date_ocurrence: :desc)
   end  
 
   # GET /current_accounts
   # GET /current_accounts.json
   def index
-    @q = CurrentAccount.ransack(params[:q])
+    if current_user.admin?
+      @q = CurrentAccount.ransack(params[:q])
+    else
+      @query = CurrentAccount.where(city_id: current_user.city_id)
+      @q = @query.ransack(params[:q])
+    end
     @current_accounts = @q.result.paginate(:page => params[:page]).order(date_ocurrence: :desc)
   end
 
