@@ -119,7 +119,7 @@ class Advance < ActiveRecord::Base
     date_advance = Date.current
 
     ActiveRecord::Base.transaction do
-      self.update_attributes(status: TypeStatus::FECHADO)
+      self.update(status: TypeStatus::FECHADO)
       Advance.create!(client_id: client_id, date_advance: date_advance, price: price, percent: percent, number_parts: number_parts, status: TypeStatus::ABERTO)
       puts ">>>>>>>>>>>>>>>>> recalculo efetuado com sucesso."
     end
