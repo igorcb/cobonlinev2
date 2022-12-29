@@ -123,6 +123,10 @@ class Advance < ActiveRecord::Base
     Advance.advances_open.sum(:price) - Advance.advances_open.joins(:item_advances).sum('item_advances.value_payment')
   end
 
+  def delay
+    item_advances.sum("price - value_payment").to_f
+  end
+
   def recalculation
     #inicializando as variaveis
     percent = self.percent
