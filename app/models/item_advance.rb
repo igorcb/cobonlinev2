@@ -50,11 +50,11 @@ class ItemAdvance < ActiveRecord::Base
   end
 
   def self.total_diaria(city_id)
-    @item_advances = ItemAdvance.joins(:client, :city).select("cities.id as id, cities.name as cidade, sum(item_advances.price) as valor, sum(item_advances.value_payment) as valor_pago").where("cities.id = ? and DATE(due_date) = ? ", city_id, Date.current.to_s ).sum(:price)    
+    @item_advances = ItemAdvance.joins(:advance, :client, :city).select("cities.id as id, cities.name as cidade, sum(item_advances.price) as valor, sum(item_advances.value_payment) as valor_pago").where("cities.id = ? and DATE(due_date) = ? and advances.status = ? ", city_id, Date.current.to_s, Advance::TypeStatus::ABERTO ).sum(:price)    
   end
 
   def self.total_cobrado(city_id)
-    @item_advances = ItemAdvance.joins(:client, :city).select("cities.id as id, cities.name as cidade, sum(item_advances.price) as valor, sum(item_advances.value_payment) as valor_pago").where("cities.id = ? and DATE(due_date) = ? ", city_id, Date.current ).sum(:value_payment)
+    @item_advances = ItemAdvance.joins(:advance, :client, :city).select("cities.id as id, cities.name as cidade, sum(item_advances.price) as valor, sum(item_advances.value_payment) as valor_pago").where("cities.id = ? and DATE(due_date) = ? and advances.status = ?", city_id, Date.current, Advance::TypeStatus::ABERTO ).sum(:value_payment)
   end
 
 end
