@@ -16,10 +16,14 @@ class ItemAdvancesController < ApplicationController
 
   def update
     if params[:value_payment].blank?
-      redirect_to item_advances_path, :flash => { :alert => "Informe o valor da parcela" } 
+      if current_user.admin?
+        redirect_to edit_item_advance_path(params[:id]), :flash => { :alert => "Informe o valor da parcela" } 
+      else
+        redirect_to item_advances_path, :flash => { :alert => "Informe o valor da parcela" } 
+      end
       return
     end 
-
+    
     @item_advance = ItemAdvance.find(params[:id])
     respond_to do |format|
       updated = false
