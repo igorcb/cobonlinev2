@@ -8,11 +8,11 @@ default: &default
 
 development:
   <<: *default
-  database: cobonline_development
+  database: cobonline_v2_development
 
 test:
   <<: *default
-  database: cobonline_test
+  database: cobonline_v2_test
 
 production:
   <<: *default
