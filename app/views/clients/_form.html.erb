@@ -27,9 +27,6 @@
   
     <div class="tab-content">
       <div class="tab-pane fade show active" id="home">
-        <%# <h4 class="mt-2">Home tab content</h4>
-        <p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p> %>
-
         <div class="m-3">
           <%= f.label :city_id, "Route" %><br>
           <%= f.select( :city_id, City.order(:name).collect {|c| [c.name, c.id]} , {include_blank: true}, {class: "form-select"} )%>
@@ -85,32 +82,71 @@
 
           <div class="col-sm">
             <%= f.label :home_number, "Number" %><br>
-            <%= f.text_field :home_number, {class: "form-control", placeholder: "Number", aria: { label: "Number" }} %>
+            <%= f.text_field :home_number, {class: "form-control", placeholder: "Number", aria: { label: "Home Number" }} %>
           </div>
 
           <div class="col-sm-5">
             <%= f.label :home_complement, "Complement" %><br>
-            <%= f.text_field :home_complement, {class: "form-control", placeholder: "Complement", aria: { label: "Complement" }} %>
+            <%= f.text_field :home_complement, {class: "form-control", placeholder: "Complement", aria: { label: "Home Complement" }} %>
           </div>
 
           <div class="col-sm-7">
             <%= f.label :home_district, "District" %><br>
-            <%= f.text_field :home_district, {class: "form-control", placeholder: "District", aria: { label: "District" }} %>
+            <%= f.text_field :home_district, {class: "form-control", placeholder: "District", aria: { label: "Home District" }} %>
           </div>
 
           <div class="col-sm-6">
             <%= f.label :home_city, "City" %><br>
-            <%= f.text_field :home_city, {class: "form-control", placeholder: "City", aria: { label: "City" }} %>
+            <%= f.text_field :home_city, {class: "form-control", placeholder: "City", aria: { label: "Home City" }} %>
           </div>
 
           <div class="col-sm-3">
             <%= f.label :home_state, "State" %><br>
-            <%= f.text_field :home_state, {class: "form-control", placeholder: "State", aria: { label: "State" }} %>
+            <%= f.text_field :home_state, {class: "form-control", placeholder: "State", aria: { label: "Home State" }} %>
           </div>
 
           <div class="col-sm-3">
             <%= f.label :home_zip, "Zip-Code" %><br>
-            <%= f.text_field :home_zip, {class: "form-control", placeholder: "Zip-Code", aria: { label: "Zip-Code" }} %>
+            <%= f.text_field :home_zip, {class: "form-control", placeholder: "Zip-Code", aria: { label: "Home Zip-Code" }} %>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="billing_address">
+        <div class="m-3 row g-3">
+          <div class="col-sm-9">
+            <%= f.label :billing_address, "Address" %><br>
+            <%= f.text_field :billing_address, {class: "form-control", placeholder: "Address", aria: { label: "Billing Address" }} %>
+          </div>
+
+          <div class="col-sm">
+            <%= f.label :billing_number, "Number" %><br>
+            <%= f.text_field :billing_number, {class: "form-control", placeholder: "Number", aria: { label: "Billing Number" }} %>
+          </div>
+
+          <div class="col-sm-5">
+            <%= f.label :billing_complement, "Complement" %><br>
+            <%= f.text_field :billing_complement, {class: "form-control", placeholder: "Complement", aria: { label: "Billing Complement" }} %>
+          </div>
+
+          <div class="col-sm-7">
+            <%= f.label :billing_district, "District" %><br>
+            <%= f.text_field :billing_district, {class: "form-control", placeholder: "District", aria: { label: "Billing District" }} %>
+          </div>
+
+          <div class="col-sm-6">
+            <%= f.label :billing_city, "City" %><br>
+            <%= f.text_field :billing_city, {class: "form-control", placeholder: "City", aria: { label: "Billing City" }} %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :billing_state, "State" %><br>
+            <%= f.text_field :billing_state, {class: "form-control", placeholder: "State", aria: { label: "Billing State" }} %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :billing_zip, "Zip-Code" %><br>
+            <%= f.text_field :billing_zip, {class: "form-control", placeholder: "Zip-Code", aria: { label: "Billing Zip-Code" }} %>
           </div>
         </div>
       </div>
