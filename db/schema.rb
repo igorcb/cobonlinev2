@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_200124) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_214519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_200124) do
     t.string "billing_city", limit: 100
     t.string "billing_state", limit: 100
     t.string "billing_zip", limit: 100
+    t.string "references_one_name", limit: 100
+    t.string "references_one_origin", limit: 100
+    t.string "references_one_phone", limit: 100
+    t.string "references_two_name", limit: 100
+    t.string "references_two_origin", limit: 100
+    t.string "references_two_phone", limit: 100
+    t.string "references_three_name", limit: 100
+    t.string "references_three_origin", limit: 100
+    t.string "references_three_phone", limit: 100
     t.index ["city_id"], name: "index_clients_on_city_id"
   end
 

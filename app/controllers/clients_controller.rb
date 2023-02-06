@@ -73,7 +73,10 @@ class ClientsController < ApplicationController
     def client_params
       params.require(:client).permit(:city_id, :name, :fone, :cpf, :rg, :birthday, :credit_limit, :indication, :status,
         :home_address, :home_number, :home_complement, :home_district, :home_city, :home_state, :home_zip,
-        :billing_address, :billing_number, :billing_complement, :billing_district, :billing_city, :billing_state, :billing_zip
+        :billing_address, :billing_number, :billing_complement, :billing_district, :billing_city, :billing_state, :billing_zip,
+        :references_one_name, :references_one_origin, :references_one_phone, 
+        :references_two_name, :references_two_origin, :references_two_phone, 
+        :references_three_name, :references_three_origin, :references_three_phone
       )
     end
 end

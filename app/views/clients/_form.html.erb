@@ -23,6 +23,9 @@
       <li class="nav-item">
         <a href="#billing_address" class="nav-link" data-bs-toggle="tab">Endereço de Cobrança</a>
       </li>
+      <li class="nav-item">
+        <a href="#references" class="nav-link" data-bs-toggle="tab">Referências</a>
+      </li>
     </ul>
   
     <div class="tab-content">
@@ -151,6 +154,55 @@
         </div>
       </div>
 
+      <div class="tab-pane fade" id="references">
+        <div class="m-3 row g-3">
+          <div class="col-sm-4">
+            <%= f.label :references_one_name, "Nome" %><br>
+            <%= f.text_field :references_one_name, {class: "form-control", placeholder: "Nome", aria: { label: "References One Name" }} %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :references_one_origin, "Origin" %><br>
+            <%= f.text_field :references_one_origin, {class: "form-control", placeholder: "Origin", aria: { label: "References One Origin" }} %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :references_one_phone, "Phone" %><br>
+            <%= f.text_field :references_one_phone, {class: "form-control", placeholder: "Phone", aria: { label: "References One Phone" }} %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :references_two_name, "Nome" %><br>
+            <%= f.text_field :references_two_name, {class: "form-control", placeholder: "Nome", aria: { label: "References Two Name" }} %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :references_two_origin, "Origin" %><br>
+            <%= f.text_field :references_two_origin, {class: "form-control", placeholder: "Origin", aria: { label: "References Two Origin" }} %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :references_two_phone, "Phone" %><br>
+            <%= f.text_field :references_two_phone, {class: "form-control", placeholder: "Phone", aria: { label: "References Two Phone" }} %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :references_three_name, "Nome" %><br>
+            <%= f.text_field :references_three_name, {class: "form-control", placeholder: "Nome", aria: { label: "References Three Name" }} %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :references_three_origin, "Origin" %><br>
+            <%= f.text_field :references_three_origin, {class: "form-control", placeholder: "Origin", aria: { label: "References Three Origin" }} %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :references_three_phone, "Phone" %><br>
+            <%= f.text_field :references_three_phone, {class: "form-control", placeholder: "Phone", aria: { label: "References Three Phone" }} %>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 
