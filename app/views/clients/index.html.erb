@@ -9,8 +9,9 @@
     <tr>
       <th><%= Client.human_attribute_name('city') %></th>
       <th><%= Client.human_attribute_name('name') %></th>
-      <th><%= Client.human_attribute_name('district') %></th>
       <th><%= Client.human_attribute_name('fone') %></th>
+      <th><%= Client.human_attribute_name('credit_limit') %></th>
+      <th><%= Client.human_attribute_name('status') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,8 +21,9 @@
       <tr>
         <td><%= client.city.name %></td>
         <td><%= client.name %></td>
-        <td><%= client.district %></td>
         <td><%= client.fone %></td>
+        <td><%= client.credit_limit %></td>
+        <td><%= client.status %></td>
         <td><%= link_to t('show'), client %></td>
         <td><%= link_to t('edit'), edit_client_path(client) %></td>
         <td><%= link_to t('destroy'), client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
