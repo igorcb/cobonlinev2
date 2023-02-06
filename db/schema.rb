@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2016_09_16_142509) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_123115) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,12 @@ ActiveRecord::Schema[7.0].define(version: 2016_09_16_142509) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "district"
+    t.string "rg", limit: 30
+    t.string "cpf", limit: 30
+    t.date "birthday"
+    t.decimal "credit_limit", precision: 9, scale: 2, default: "0.0", null: false
+    t.string "indication", limit: 100
+    t.integer "status", default: 0
     t.index ["city_id"], name: "index_clients_on_city_id"
   end
 
