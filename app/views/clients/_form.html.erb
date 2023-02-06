@@ -18,10 +18,10 @@
           <a href="#home" class="nav-link active" data-bs-toggle="tab">Geral</a>
       </li>
       <li class="nav-item">
-        <a href="#profile" class="nav-link" data-bs-toggle="tab">Endereço Residencial</a>
+        <a href="#home_address" class="nav-link" data-bs-toggle="tab">Endereço Residencial</a>
       </li>
       <li class="nav-item">
-        <a href="#messages" class="nav-link" data-bs-toggle="tab">Endereço de Cobrança</a>
+        <a href="#billing_address" class="nav-link" data-bs-toggle="tab">Endereço de Cobrança</a>
       </li>
     </ul>
   
@@ -74,27 +74,47 @@
           <%= f.label :status %><br>
           <%= f.text_field :status, {class: "form-control"} %>
         </div>
-
-
       </div>
 
-      <div class="tab-pane fade" id="profile">
-        <%# <h4 class="mt-2">Profile tab content</h4>
-        <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p> %>
-        <div class="m-3">
-          <%= f.label :district %><br>
-          <%= f.text_field :district, {class: "form-control"} %>
+      <div class="tab-pane fade" id="home_address">
+        <div class="m-3 row g-3">
+          <div class="col-sm-9">
+            <%= f.label :home_address, "Address" %><br>
+            <%= f.text_field :home_address, {class: "form-control", placeholder: "Address", aria: { label: "Home Address" }} %>
+          </div>
+
+          <div class="col-sm">
+            <%= f.label :home_number, "Number" %><br>
+            <%= f.text_field :home_number, {class: "form-control", placeholder: "Number", aria: { label: "Number" }} %>
+          </div>
+
+          <div class="col-sm-5">
+            <%= f.label :home_complement, "Complement" %><br>
+            <%= f.text_field :home_complement, {class: "form-control", placeholder: "Complement", aria: { label: "Complement" }} %>
+          </div>
+
+          <div class="col-sm-7">
+            <%= f.label :home_district, "District" %><br>
+            <%= f.text_field :home_district, {class: "form-control", placeholder: "District", aria: { label: "District" }} %>
+          </div>
+
+          <div class="col-sm-6">
+            <%= f.label :home_city, "City" %><br>
+            <%= f.text_field :home_city, {class: "form-control", placeholder: "City", aria: { label: "City" }} %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :home_state, "State" %><br>
+            <%= f.text_field :home_state, {class: "form-control", placeholder: "State", aria: { label: "State" }} %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :home_zip, "Zip-Code" %><br>
+            <%= f.text_field :home_zip, {class: "form-control", placeholder: "Zip-Code", aria: { label: "Zip-Code" }} %>
+          </div>
         </div>
       </div>
 
-      <div class="tab-pane fade" id="messages">
-        <%# <h4 class="mt-2">Messages tab content</h4>
-        <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p> %>
-        <div class="m-3">
-          <%= f.label :district %><br>
-          <%= f.text_field :district, {class: "form-control"} %>
-        </div>
-      </div>
     </div>
   </div>
 

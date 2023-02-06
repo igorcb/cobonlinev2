@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_123115) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_180811) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,13 +41,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_123115) do
     t.string "fone", limit: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "district"
+    t.string "home_district"
     t.string "rg", limit: 30
     t.string "cpf", limit: 30
     t.date "birthday"
     t.decimal "credit_limit", precision: 9, scale: 2, default: "0.0", null: false
     t.string "indication", limit: 100
     t.integer "status", default: 0
+    t.string "home_address", limit: 100
+    t.string "home_number", limit: 100
+    t.string "home_complement", limit: 100
+    t.string "home_city", limit: 100
+    t.string "home_state", limit: 100
+    t.string "home_zip", limit: 100
     t.index ["city_id"], name: "index_clients_on_city_id"
   end
 
