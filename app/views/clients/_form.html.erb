@@ -66,18 +66,26 @@
         </div>
 
         <div class="m-3">
-          <%= f.label :credit_limit %><br>
-          <%= f.text_field :credit_limit, {class: "form-control"} %>
-        </div>
-
-        <div class="m-3">
           <%= f.label :indication %><br>
           <%= f.text_field :indication, {class: "form-control"} %>
         </div>
 
-        <div class="m-3">
-          <%= f.label :status %><br>
-          <%= f.text_field :status, {class: "form-control"} %>
+        <div class="row g-3">
+          <div class="m-3 col-sm-5">
+            <%= f.label :type_payment %><br>
+            <%= f.select :type_payment, [["daily", "daily"], ["fortnightly", "fortnightly"], ["monthly", "monthly"]], {include_blank: true}, {class: "form-select"} %>
+          </div>
+
+          <div class="m-3 col-sm-3">
+            <%= f.label :credit_limit %><br>
+            <%= f.text_field :credit_limit, {class: "form-control"} %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :status %><br>
+            <%= f.select :status, [["active", "active"], ["inactive", "inactive"]], {include_blank: true}, {class: "form-select"} %>
+          </div>
+
         </div>
       </div>
 

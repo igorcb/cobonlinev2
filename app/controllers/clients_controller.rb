@@ -43,7 +43,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1.json
   def update
     respond_to do |format|
-      if @client.update(client_params)
+      if @client.update!(client_params)
         format.html { redirect_to @client, notice: 'Client was successfully updated.' }
         format.json { render :show, status: :ok, location: @client }
       else
@@ -71,8 +71,8 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:type_trade_id, :city_id, :name, :fone, :cpf, :rg, :birthday, :credit_limit, 
-        :indication, :status,
+      params.require(:client).permit(:type_trade_id, :city_id, :name, :fone, :cpf, :rg, :birthday, 
+        :type_payment, :credit_limit, :indication, :status,
         :home_address, :home_number, :home_complement, :home_district, :home_city, :home_state, :home_zip, :home_link,
         :billing_address, :billing_number, :billing_complement, :billing_district, :billing_city, :billing_state, 
         :billing_zip, :billing_link,
