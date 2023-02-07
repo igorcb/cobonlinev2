@@ -1,0 +1,23 @@
+<%= form_with(model: type_trade) do |f| %>
+  <% if type_trade.errors.any? %>
+    <div style="color: red">
+      <h4><%= pluralize(type_trade.errors.count, "error") %> prohibited this type_trade from being saved:</h4>
+
+      <ul>
+        <% type_trade.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-primary btn-block'  %>
+    <%= link_to t('back'), type_trades_path, class: 'btn btn-default btn-block' %>
+  </div>
+<% end %>

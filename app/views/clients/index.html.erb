@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1><%= t(".title") %></h1>
 
 <%= link_to t(".new"), new_client_path, class: "btn btn-primary btn-block" %> <br />
@@ -26,7 +24,7 @@
         <td><%= client.status %></td>
         <td><%= link_to t('show'), client %></td>
         <td><%= link_to t('edit'), edit_client_path(client) %></td>
-        <td><%= link_to t('destroy'), client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('destroy'), client, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></td>
       </tr>
     <% end %>
   </tbody>

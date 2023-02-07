@@ -1,12 +1,12 @@
 <%= form_for(@client) do |f| %>
   <% if @client.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+    <div style="color: red">
+      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this @client from being saved:</h2>
 
       <ul>
-      <% @client.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @client.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -30,6 +30,11 @@
   
     <div class="tab-content">
       <div class="tab-pane fade show active" id="home">
+        <div class="m-3">
+          <%= f.label :type_trade_id, "Type of Trade" %><br>
+          <%= f.select( :type_trade_id, TypeTrade.order(:name).collect {|c| [c.name, c.id]} , {include_blank: true}, {class: "form-select"} )%>
+        </div>
+
         <div class="m-3">
           <%= f.label :city_id, "Route" %><br>
           <%= f.select( :city_id, City.order(:name).collect {|c| [c.name, c.id]} , {include_blank: true}, {class: "form-select"} )%>
@@ -112,6 +117,11 @@
             <%= f.label :home_zip, "Zip-Code" %><br>
             <%= f.text_field :home_zip, {class: "form-control", placeholder: "Zip-Code", aria: { label: "Home Zip-Code" }} %>
           </div>
+
+          <div class="col-sm-12">
+            <%= f.label :home_link, "Link" %><br>
+            <%= f.text_field :home_link, {class: "form-control", placeholder: "Link", aria: { label: "Home Link Address" }} %>
+          </div>
         </div>
       </div>
 
@@ -150,6 +160,11 @@
           <div class="col-sm-3">
             <%= f.label :billing_zip, "Zip-Code" %><br>
             <%= f.text_field :billing_zip, {class: "form-control", placeholder: "Zip-Code", aria: { label: "Billing Zip-Code" }} %>
+          </div>
+
+          <div class="col-sm-12">
+            <%= f.label :billing_link, "Link" %><br>
+            <%= f.text_field :billing_link, {class: "form-control", placeholder: "Link", aria: { label: "Billing Link Address" }} %>
           </div>
         </div>
       </div>

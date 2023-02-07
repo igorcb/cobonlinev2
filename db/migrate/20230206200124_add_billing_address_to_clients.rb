@@ -7,5 +7,6 @@ class AddBillingAddressToClients < ActiveRecord::Migration[7.0]
     add_column :clients, :billing_city, :string, limit: 100
     add_column :clients, :billing_state, :string, limit: 100
     add_column :clients, :billing_zip, :string, limit: 100
+    add_column :clients, :billing_link, :text
   end
 end

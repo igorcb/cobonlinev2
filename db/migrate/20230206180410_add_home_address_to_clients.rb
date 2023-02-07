@@ -6,5 +6,6 @@ class AddHomeAddressToClients < ActiveRecord::Migration[7.0]
     add_column :clients, :home_city, :string, limit: 100
     add_column :clients, :home_state, :string, limit: 100
     add_column :clients, :home_zip, :string, limit: 100
+    add_column :clients, :home_link, :text
   end
 end

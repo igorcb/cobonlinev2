@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_214519) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_07_104955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_214519) do
     t.string "home_city", limit: 100
     t.string "home_state", limit: 100
     t.string "home_zip", limit: 100
+    t.text "home_link"
     t.string "billing_address", limit: 100
     t.string "billing_number", limit: 100
     t.string "billing_complement", limit: 100
@@ -61,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_214519) do
     t.string "billing_city", limit: 100
     t.string "billing_state", limit: 100
     t.string "billing_zip", limit: 100
+    t.text "billing_link"
     t.string "references_one_name", limit: 100
     t.string "references_one_origin", limit: 100
     t.string "references_one_phone", limit: 100
@@ -70,7 +72,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_214519) do
     t.string "references_three_name", limit: 100
     t.string "references_three_origin", limit: 100
     t.string "references_three_phone", limit: 100
+    t.bigint "type_trade_id"
     t.index ["city_id"], name: "index_clients_on_city_id"
+    t.index ["type_trade_id"], name: "index_clients_on_type_trade_id"
   end
 
   create_table "costs", force: :cascade do |t|
@@ -114,6 +118,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_214519) do
     t.index ["advance_id"], name: "index_item_advances_on_advance_id"
   end
 
+  create_table "type_trades", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -131,6 +141,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_214519) do
 
   add_foreign_key "advances", "clients"
   add_foreign_key "clients", "cities"
+  add_foreign_key "clients", "type_trades"
   add_foreign_key "current_accounts", "cities"
   add_foreign_key "current_accounts", "costs"
   add_foreign_key "item_advances", "advances"
