@@ -45,8 +45,8 @@
 
 <%= link_to t('edit'), edit_advance_path(@advance) %> |
 <%= link_to t('recalculation'), recalculation_path(@advance) %> |
-<%= link_to t('back'), advances_path %>
-
+<%= link_to t('back'), advances_path %> |
+<%= link_to t('print'), print_advance_path(@advance) %>
 <hr/>
 
 <%= render 'item_advances', item_advances: @advance.item_advances, dasboard: false %>
