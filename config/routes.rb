@@ -20,7 +20,11 @@ Rails.application.routes.draw do
     get "users", to: "devise/sessions#new"
   end
   resources :item_advances
-  resources :advances
+  resources :advances do
+    member do
+      get "print"
+    end
+  end
   resources :clients
   resources :holidays
   resources :cities

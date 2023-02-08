@@ -1,7 +1,7 @@
 class AdvancesController < ApplicationController
   before_action :authenticate_user!
   before_action :user_admin
-  before_action :set_advance, only: [:show, :edit, :update, :destroy, :recalculation]
+  before_action :set_advance, only: [:show, :edit, :update, :destroy, :recalculation, :print]
 
   def get_client_for_city
     #puts ">>>>>>>>>>>>>>>> cost_center_id: #{params[:cost_center_id].to_i}"
@@ -92,6 +92,34 @@ class AdvancesController < ApplicationController
     redirect_to advances_path
   end
 
+  def print
+    pdf = AdvancePrint.new(@advance)
+   
+    # pdf = Prawn::Document.new(AdvancePrint::PDF_OPTIONS) do |pdf|
+    #   pdf.fill_color "40464e"
+    #   pdf.text "Ruby Metaprogramming", :size => 40, :style => :bold, :align => :center
+
+    #   pdf.move_down 30
+    #   pdf.text "Certificado", :size => 24, :align => :center, :style => :bold
+
+    #   pdf.move_down 30
+    #   pdf.text "Certificamos que <b>Nando Vieira</b> participou...", :inline_format => true
+
+    #   pdf.move_down 15
+    #   pdf.text "São Paulo, #{Time.now.to_formatted_s(:short)}"
+
+    #   pdf.move_down 30
+    #   # pdf.font Rails.root.join("fonts/custom.ttf")
+    #   pdf.text "howto", :size => 24
+
+    #   pdf.move_up 5
+    #   pdf.font "Helvetica"
+    #   pdf.text "http://howtocode.com.br", :size => 10
+    # end
+
+    send_data(pdf.render, filename: "Advance_#{@advance.id}.pdf", type: 'application/pdf', disposition: 'inline')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_advance
@@ -103,6 +131,4 @@ class AdvancesController < ApplicationController
       #params.require(:advance).permit(:date_advance, :client_id, :price, :balance, :number_parts, :percent)
       params.require(:advance).permit(:date_advance, :client_id, :price, :number_parts, :percent)
     end
-
-
 end
