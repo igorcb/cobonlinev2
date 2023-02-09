@@ -42,6 +42,14 @@ class ItemAdvance < ActiveRecord::Base
       advance.update(status: Advance::TypeStatus::FECHADO)
     else
       puts ">>>>>>>>>>>>>>> nao faz nada."
+      byebug
+      resta = 0.0
+      dia_anterior = ultimo_dia_util(self.due_date - 1)
+      parcela_anterior = self.advance.item_advances.where(due_date: dia_anterior).first
+      # ItemAdvance.update(id:)
+      delay = value == 0.0 ? self.price : self.price - value
+      residue = parcela_anterior.residue.to_f - value
+      ItemAdvance.update!(id: self.id, delay: delay, residue: residue)
     end
   end
 
