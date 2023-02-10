@@ -21,6 +21,20 @@ describe PayParcel do
     end
   end
 
+  context "baixar a primeira parcela informando a data_pagamento e valor igual ao zero" do
+    let(:parcel) { advance.item_advances.first }
+    let(:date_payment) { "2023-02-06" }
+    let(:value_payment) { 0.00 }
+
+    it "deve atualizar data pagamento, valor do pagamento, atraso e restante" do
+      expect(subject.call).to eq true  
+      expect(parcel.date_payment).to eq "2023-02-06".to_date
+      expect(parcel.value_payment).to eq 0.00
+      expect(parcel.delay).to eq 50.00
+      expect(parcel.residue).to eq 1000.00
+    end
+  end
+
   context "baixar parcela informando a data_pagamento e valor igual ao valor da parcela" do
     let(:parcel) { advance.item_advances.where(due_date: date_payment).first }
     let(:date_payment) { "2023-02-07" }
@@ -125,4 +139,23 @@ describe PayParcel do
       expect(parcel.residue.to_f).to eq 810.00
     end
   end  
+
+  context "baixar ultima parcela informando a data_pagamento e valor maior que zero" do
+    let(:parcel) { advance.item_advances.last }
+    let(:date_payment) { "2023-03-03" }
+    let(:value_payment) { 50.00 }
+
+    context "quando o saldo do emprestimo for maior que zero" do
+      it "deve baixar a parcela e criar uma nova parcela" do
+        expect(subject.call).to eq true  
+        expect(parcel.date_payment).to eq "2023-03-03".to_date
+        expect(parcel.value_payment.to_f).to eq 50.00
+        expect(parcel.advance.item_advances.count).to eq 21
+        expect(parcel.advance.item_advances.last.due_date).to eq "2023-03-06".to_date
+        expect(parcel.advance.item_advances.last.price.to_f).to eq 50.00
+        expect(parcel.advance.item_advances.last.delay).to eq 0.00
+        expect(parcel.advance.item_advances.last.residue).to eq 0.00
+      end
+    end
+  end
 end
