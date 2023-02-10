@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe PayParcel do
+describe ItemAdvances::PayParcel do
   subject { described_class.new(parcel, date_payment, value_payment) } 
 
   Cost.destroy_all
