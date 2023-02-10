@@ -106,7 +106,6 @@ class AdvancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advance_params
-      #params.require(:advance).permit(:date_advance, :client_id, :price, :balance, :number_parts, :percent)
-      params.require(:advance).permit(:date_advance, :client_id, :price, :number_parts, :percent)
+      params.require(:advance).permit(:date_advance, :client_id, :price, :number_parts, :percent, :observation)
     end
 end
