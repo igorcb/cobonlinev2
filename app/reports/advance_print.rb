@@ -17,14 +17,17 @@ class AdvancePrint < Prawn::Document
 
   def header
     # fill_color "40464e"
-    bounding_box([0, cursor - 5], width: 350, height: 700) do
+    rows = (@advance.item_advances.count - 20) * 20
+    height = 580 + rows
+    
+    bounding_box([0, cursor - 5], width: 345, height: height) do
       indent(20) do
         move_down 10
         text "<b>Nome:</b> #{@advance.client.name}", :inline_format => true
     
         move_down 05
         bounds.left
-        text "<b>Data:</b> #{@advance.date_advance}     <b>Valor:</b> #{@advance.price}", :inline_format => true
+        text "<b>Data:</b> #{@advance.date_advance}     <b>Valor:</b> R$ #{@advance.price}", :inline_format => true
         
         move_down 15
   
@@ -44,7 +47,6 @@ class AdvancePrint < Prawn::Document
 
         data = [table_header]
         data += table_data
-        table(data)
         table(data, :header => true)
       end
           
