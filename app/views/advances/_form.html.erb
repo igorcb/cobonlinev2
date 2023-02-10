@@ -11,11 +11,7 @@
     </div>
   <% end %>
 
-<!--   <div class="form-group">
-    <%#= f.label :date_advance %><br>
-    <%#= f.date_select :date_advance, {class: "form-control"} %>
-  </div>
- -->  <div class="form-group">
+  <div class="form-group">
     <%= f.label :date_advance, "Data" %><br>
     <% if @advance.new_record? %> 
       <%= f.text_field :date_advance, value: date_br(DateTime.now), class: "form-control datepicker" %>
@@ -41,6 +37,10 @@
   <div class="form-group">
     <%= f.label :percent %><br>
     <%= f.text_field :percent, {value: 15, class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :observation %><br>
+    <%= f.text_area :observation, {class: "form-control"} %>
   </div>
   <div class="form-group">
     <%= f.submit class: 'btn btn-primary btn-block'  %>

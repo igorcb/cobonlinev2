@@ -39,8 +39,13 @@
 </p>
 
 <p>
-  <strong>Status:</strong>
+  <strong><%= Advance.human_attribute_name('status') %>:</strong>
   <%= @advance.name_status %>
+</p>
+
+<p>
+  <strong><%= Advance.human_attribute_name('observation') %>:</strong>
+  <%= @advance.observation %>
 </p>
 
 <%= link_to t('edit'), edit_advance_path(@advance) %> |
