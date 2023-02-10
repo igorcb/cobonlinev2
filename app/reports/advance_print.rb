@@ -33,8 +33,8 @@ class AdvancePrint < Prawn::Document
       item.push(i.parts)
       item.push(date_br(i.due_date))
       item.push(i.value_payment.to_f)
-      item.push("0.00") #TODO: Esperar fazer o calculo do Delay corretamente
-      item.push("0.00") #TODO: Esperar fazer o calculo do Residue corretamente
+      item.push(i.delay.to_f)
+      item.push(i.residue)
       item.push("               ")
       table_data.push(item)
     end
