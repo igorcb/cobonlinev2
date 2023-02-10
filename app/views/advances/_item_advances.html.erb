@@ -9,8 +9,8 @@
       <th><%= Advance.human_attribute_name('price') %></th>
       <th><%= Advance.human_attribute_name('date_payment') %></th>
       <th><%= Advance.human_attribute_name('value_payment') %></th>
-      <th><%= Advance.human_attribute_name('delay') %></th>
       <th><%= Advance.human_attribute_name('residue') %></th>
+      <th><%= Advance.human_attribute_name('delay') %></th>
       <th><%= Advance.human_attribute_name('note') %></th>
       <th><%= t(Advance.human_attribute_name('options')) %></th>
     </tr>
@@ -27,8 +27,8 @@
         <td><%= item.price %></td>
         <td><%= date_br(item.date_payment) %></td>
         <td><%= item.value_payment %></td>
-        <td><%= item.delay %></td>
         <td><%= item.residue %></td>
+        <td><%= item.delay %></td>
         <td><%= item.note %></td>
         <td>
           <%= link_to t('edit'), edit_item_advance_path(item), style: 'text-decoration: none;' if item.due_date <= Date.current %>
