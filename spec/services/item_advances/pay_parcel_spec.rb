@@ -1,11 +1,12 @@
 require "rails_helper"
 
 describe ItemAdvances::PayParcel do
-  subject { described_class.new(parcel, date_payment, value_payment) } 
+  subject { described_class.new(parcel, date_payment, value_payment, note) } 
 
   Cost.destroy_all
   FactoryBot.create(:cost, id: 1, name: "PAGAMENTO_EMPRESTIMO")
   let(:advance) { FactoryBot.create(:advance, date_advance: "2023-02-03", price: 1000) }
+  let(:note) { "Lorem ipsum" }
 
   context "baixar a primeira parcela informando a data_pagamento e valor igual ao valor da parcela" do
     let(:parcel) { advance.item_advances.first }

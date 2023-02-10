@@ -3,10 +3,11 @@ require 'util'
 module ItemAdvances
   class PayParcel
     include Util
-    def initialize(parcel, date_payment, value_payment)
+    def initialize(parcel, date_payment, value_payment, note)
       @parcel = parcel
       @date_payment = date_payment
       @value_payment = value_payment
+      @note = note
     end
 
     def call
@@ -21,6 +22,7 @@ module ItemAdvances
           value_payment: @value_payment,
           delay: delay,
           residue: residue,
+          note: @note
         )
         
         if generate_new_parcel?

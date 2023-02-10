@@ -22,7 +22,7 @@
 
     <div class="mb-3">
       <%= label_tag :note, "Note", class: "form-label" %>
-      <%= text_field_tag :note, nil, class: "form-control" %>
+      <%= text_field_tag :note, @item_advance.note, class: "form-control" %>
     </div>
 
     <%= f.submit "Baixar", class: "btn btn-primary" %>

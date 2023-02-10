@@ -31,7 +31,7 @@
         <td><%= item.delay %></td>
         <td><%= item.note %></td>
         <td>
-          <%= link_to t('edit'), edit_item_advance_path(item), style: 'text-decoration: none;' if item.due_date <= Date.current %>
+          <%= link_to t('edit'), edit_item_advance_path(item, note: item.note), style: 'text-decoration: none;' if item.due_date <= Date.current %>
         </td>
       </tr>
     <% end %>
