@@ -47,10 +47,22 @@
       <div class="card mb-3" style="max-width: 22rem; border-left: 3px solid --bs-danger;">
         <div class="card-header text-bg-danger"><%= link_to item.client.name, edit_item_advance_path(item), style: 'text-decoration: none; color: white' %></div>
         <div class="card-body">
-          <p>
-            Venc: <%= item.due_date.to_s %> | Valor: <%= item.price.to_f %> <br />
-            Dt. Pgto: <%= item.date_payment.to_s %> | Valor Pago: <%= item.value_payment.to_f %>          
-          </p>
+          <% url_link = item.advance.client.billing_link %>
+
+          <div class="d-flex flex-row justify-content-between align-items-center">
+            <div>
+              <div>Venc: <%= date_br(item.due_date) %></div>
+              <div>Pgto: <%= date_br(item.date_payment) %></div>
+            </div>
+            
+            <div>
+              <div>Valor: <%= item.price.to_f %></div>
+              <div>Pago: <%= item.value_payment.to_f %></div>
+            </div>
+            <div>
+              <%= link_to "<i class=\"bi bi-geo-alt lg\"></i>".html_safe, url_link, style:"font-size:32px;", target: "_blank"  %>
+            </div>
+          </div>          
         </div>
       </div>
 
@@ -59,10 +71,19 @@
       <div class="card mb-3" style="max-width: 22rem; border-left: 3px solid --bs-info;">
         <div class="card-header text-bg-info"><%= item.client.name %></div>
         <div class="card-body">
-          <p>
-            Venc: <%= item.due_date.to_s %> | Valor: <%= item.price.to_f %> <br />
-            Dt. Pgto: <%= item.date_payment.to_s %> | Valor Pago: <%= item.value_payment.to_f %>          
-          </p>
+          
+          <div class="d-flex flex-row justify-content-between align-items-center">
+            <div>
+              <div>Venc: <%= date_br(item.due_date) %></div>
+              <div>Pgto: <%= date_br(item.date_payment) %></div>
+            </div>
+            
+            <div>
+              <div>Valor: <%= item.price.to_f %></div>
+              <div>Pago: <%= item.value_payment.to_f %></div>
+            </div>
+          </div>          
+          
         </div>
       </div>
    <% end %>
