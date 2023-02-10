@@ -15,36 +15,65 @@ class ItemAdvancesController < ApplicationController
   end
 
   def update
+    @item_advance = ItemAdvance.find(params[:id])
+  
     if params[:value_payment].blank?
       if current_user.admin?
-        redirect_to edit_item_advance_path(params[:id]), :flash => { :alert => "Informe o valor da parcela" } 
+        redirect_to edit_item_advance_path(@item_advance), :flash => { :alert => "Informe o valor da parcela" } 
       else
         redirect_to item_advances_path, :flash => { :alert => "Informe o valor da parcela" } 
       end
       return
-    end 
-    
-    @item_advance = ItemAdvance.find(params[:id])
-    respond_to do |format|
-      updated = false
+    else 
       if current_user.admin?
-        updated = @item_advance.update(date_payment: params[:date_payment], value_payment: params[:value_payment], note: params[:note]) 
+        date_payment = params[:date_payment]
       else
-        updated = @item_advance.update(date_payment: Date.current.to_s, value_payment: params[:value_payment], note: params[:note]) 
+        date_payment = Date.current.to_s
       end
-      if updated
-        @item_advance.baixa_parcela(Date.current.to_s, params[:value_payment].to_f)
-        if current_user.admin? 
-          flash[:notice] = "Parcela foi atualizada com sucesso."
-          format.html { redirect_to advance_path(@item_advance.advance) }
-        else
-          flash[:notice] = "Parcela foi atualizada com sucesso."
-          format.html { redirect_to item_advances_path }
+
+      value_payment = params[:value_payment]
+      #TODO: Adicionar a nota/observação no servico onde efetua a baixa
+      note = params[:note]
+
+      if !ItemAdvances::PayParcel.new(@item_advance, date_payment.to_date, value_payment.to_f).call
+          respond_to do |format|
+          if current_user.admin?
+            flash[:notice] = "Parcela foi atualizada com sucesso."
+            format.html { redirect_to advance_path(@item_advance.advance) }
+          else
+            flash[:notice] = "Parcela foi atualizada com sucesso."
+            format.html { redirect_to item_advances_path }
+          end
         end
       else
-        format.html { render action: 'edit' }
+        if current_user.admin?
+          redirect_to edit_item_advance_path(@item_advance), :flash => { :alert => "Ocorreu um erro ao efetuar a baixa da parcela" } 
+        else
+          redirect_to item_advances_path, :flash => { :alert => "Ocorreu um erro ao efetuar a baixa da parcela" } 
+        end
       end
-    end
+    end 
+   
+    # respond_to do |format|
+    #   updated = false
+    #   if current_user.admin?
+    #     updated = @item_advance.update(date_payment: params[:date_payment], value_payment: params[:value_payment], note: params[:note]) 
+    #   else
+    #     updated = @item_advance.update(date_payment: Date.current.to_s, value_payment: params[:value_payment], note: params[:note]) 
+    #   end
+    #   if updated
+    #     @item_advance.baixa_parcela(Date.current.to_s, params[:value_payment].to_f)
+    #     if current_user.admin? 
+    #       flash[:notice] = "Parcela foi atualizada com sucesso."
+    #       format.html { redirect_to advance_path(@item_advance.advance) }
+    #     else
+    #       flash[:notice] = "Parcela foi atualizada com sucesso."
+    #       format.html { redirect_to item_advances_path }
+    #     end
+    #   else
+    #     format.html { render action: 'edit' }
+    #   end
+    # end
   end  
 
   def destroy
