@@ -11,37 +11,47 @@ class AdvancePrint < Prawn::Document
     super()
     @advance = advance
     header
-    #certificate
   end
   
   private
 
   def header
     # fill_color "40464e"
-    move_down 05
-    text "<b>Nome:</b> #{@advance.client.name}", :inline_format => true
+    rows = (@advance.item_advances.count - 20) * 20
+    height = 580 + rows
+    
+    bounding_box([0, cursor - 5], width: 345, height: height) do
+      indent(20) do
+        move_down 10
+        text "<b>Nome:</b> #{@advance.client.name}", :inline_format => true
+    
+        move_down 05
+        bounds.left
+        text "<b>Data:</b> #{@advance.date_advance}     <b>Valor:</b> R$ #{@advance.price}", :inline_format => true
+        
+        move_down 15
+  
+        table_header = ["Parc", "Data", "Pago", "Resta", "Atraso", "Ass"]
+        table_data = []
 
-    move_down 05
-    text "<b>Data:</b> #{@advance.date_advance}     <b>Valor:</b> #{@advance.price}", :inline_format => true
+        @advance.item_advances.order(id: :asc).each do |i|
+          item = []
+          item.push(i.parts)
+          item.push(date_br(i.due_date))
+          item.push(i.value_payment.to_f)
+          item.push(i.residue.to_f)
+          item.push(i.delay.to_f)
+          item.push("               ")
+          table_data.push(item)
+        end
 
-    move_down 15
-    table_header = ["Parc", "Data", "Pago", "Atraso", "Resta", "Ass"]
-    table_data = []
-
-    @advance.item_advances.order(id: :asc).each do |i|
-      item = []
-      item.push(i.parts)
-      item.push(date_br(i.due_date))
-      item.push(i.value_payment.to_f)
-      item.push("0.00") #TODO: Esperar fazer o calculo do Delay corretamente
-      item.push("0.00") #TODO: Esperar fazer o calculo do Residue corretamente
-      item.push("               ")
-      table_data.push(item)
+        data = [table_header]
+        data += table_data
+        table(data, :header => true)
+      end
+          
+      transparent(0.5) { stroke_bounds }
     end
-
-    data = [table_header]
-    data += table_data
-    table(data, :header => true)
   end
 
   def certificate 

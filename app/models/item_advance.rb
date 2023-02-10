@@ -36,7 +36,7 @@ class ItemAdvance < ActiveRecord::Base
       puts ">>>>>>>>>>>>>>> juros: #{juros.to_f}"
     	valor_parcela = last_parts.price
     	data = proximo_dia_util(last_parts.due_date + 1.day)
-    	advance.item_advances.create!(parts: "#{parcela}/#{advance.number_parts}" , price: valor_parcela, due_date: data, dalay: 0)
+    	advance.item_advances.create!(parts: "#{parcela}/#{advance.number_parts}" , price: valor_parcela, due_date: data, delay: 0)
     elsif ((saldo == 0.00) || (saldo < 0.00))
     	puts ">>>>>>>>>>>>>>> emprestimo quitado com sucesso."
       advance.update(status: Advance::TypeStatus::FECHADO)
