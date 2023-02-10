@@ -27,6 +27,10 @@ module ItemAdvances
           generate_new_parcel
         end
 
+        if @parcel.advance.balance <= 0.00
+          Advance.where(id: @parcel.advance.id).update(status: Advance::TypeStatus::FECHADO)
+        end
+        
         true
       end
       # TODO: implementar quando ocorrer um erro na baixa da parcela

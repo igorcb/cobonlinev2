@@ -35,7 +35,7 @@ class ItemAdvancesController < ApplicationController
       #TODO: Adicionar a nota/observação no servico onde efetua a baixa
       note = params[:note]
 
-      if !ItemAdvances::PayParcel.new(@item_advance, date_payment.to_date, value_payment.to_f).call
+      if ItemAdvances::PayParcel.new(@item_advance, date_payment.to_date, value_payment.to_f).call
           respond_to do |format|
           if current_user.admin?
             flash[:notice] = "Parcela foi atualizada com sucesso."

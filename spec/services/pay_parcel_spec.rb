@@ -165,5 +165,26 @@ describe ItemAdvances::PayParcel do
         expect(parcel.advance.item_advances.last.residue).to eq 0.00
       end
     end
+
+    context "quando o saldo do emprestimo for menor ou igual a zero" do
+      let(:parcel) { advance.item_advances.last }
+      let(:date_payment) { "2023-03-03" }
+      let(:value_payment) { 1000 }
+  
+      it "deve baixar a parcela" do
+        expect(subject.call).to eq true  
+        expect(parcel.date_payment).to eq "2023-03-03".to_date
+        expect(parcel.value_payment.to_f).to eq 1000
+      end
+
+      it "deve quitar o empresatimo" do
+        expect(subject.call).to eq true  
+        parcel.reload
+        expect(parcel.date_payment).to eq "2023-03-03".to_date
+        expect(parcel.value_payment.to_f).to eq 1000
+        expect(parcel.advance.status).to eq Advance::TypeStatus::FECHADO
+      end
+    end
+
   end
 end
