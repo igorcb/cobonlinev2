@@ -53,7 +53,8 @@ module ItemAdvances
         else
           day_previus = ultimo_dia_util(@parcel.due_date - 1)
           parcel_previus = @parcel.advance.item_advances.where(due_date: day_previus).first
-          parcel_previus.residue - @value_payment
+          residue = parcel_previus.residue || 0.00
+          residue - @value_payment
         end
       end
 
@@ -63,7 +64,8 @@ module ItemAdvances
         else
           day_previus = ultimo_dia_util(@parcel.due_date - 1)
           parcel_previus = @parcel.advance.item_advances.where(due_date: day_previus).first
-          @parcel.price - @value_payment + parcel_previus.delay
+          delay = parcel_previus.delay || 0.00
+          @parcel.price - @value_payment + delay
         end
       end
 
