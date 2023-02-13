@@ -49,7 +49,7 @@ class Advance < ActiveRecord::Base
   		self.number_parts.times.each do |p|
   		  data = proximo_dia_util(data)
         parcela = n_da_parcela.to_s.rjust(3, '0')
-  	  	self.item_advances.create!(parts: "#{parcela}/#{self.number_parts}" , price: valor_parcela, due_date: data, delay: 0)
+  	  	self.item_advances.create!(parts: "#{parcela}/#{self.number_parts}" , price: valor_parcela, due_date: data)
   	  	data = data + 1.day
   	  	n_da_parcela = n_da_parcela + 1
     	end
