@@ -1,18 +1,263 @@
-<h3>Dados do Cliente</h3>
-<p>
-  <strong><%= Client.human_attribute_name('city') %></strong>
-  <%= @client.city.name %>
-</p>
+<div class="card text-bg-light my-3" style="max-width: 100%">
+  <div class="card-header"><%= t('title') %></div>
+  <div class="card-body">
+    <h5 class="card-title m-4"><%= @client.name %></h5>
+    <div class="m-4">
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="nav-item">
+            <a href="#home" class="nav-link active" data-bs-toggle="tab">Geral</a>
+        </li>
+        <li class="nav-item">
+          <a href="#home_address" class="nav-link" data-bs-toggle="tab">Endereço Residencial</a>
+        </li>
+        <li class="nav-item">
+          <a href="#billing_address" class="nav-link" data-bs-toggle="tab">Endereço de Cobrança</a>
+        </li>
+        <li class="nav-item">
+          <a href="#references" class="nav-link" data-bs-toggle="tab">Referências</a>
+        </li>
+      </ul>
+  
+      <div class="tab-content">
+        <div class="tab-pane fade show active " id="home">
+        
+          <div class="mx-3 my-4">
+            <div class="row">
+              <%= label_tag :type_trade, "Type Trade:", class:"col-sm-2 col-form-label fw-bold" %>
+              <div class="col-sm-2">
+                <%= label_tag :type_trade, @client.type_trade&.name, class:"form-control-plaintext" %>
+              </div>
+            </div>
 
-<p>
-  <strong><%= Client.human_attribute_name('name') %>:</strong>
-  <%= @client.name %>
-</p>
+            <div class="row">
+              <%= label_tag :route, "Route:", class:"col-sm-2 col-form-label fw-bold" %>
+              <div class="col-sm-10">
+                <%= label_tag :route, @client.city&.name, class:"form-control-plaintext" %>
+              </div>
+            </div>
 
-<p>
-  <strong><%= Client.human_attribute_name('fone') %></strong>
-  <%= @client.fone %>
-</p>
+            <div class="row">
+              <%= label_tag :cpf, "CPF:", class:"col-sm-2 col-form-label fw-bold" %>
+              <div class="col-sm-2">
+                <%= label_tag :cpf, @client.cpf , class:"form-control-plaintext" %>
+              </div>
 
-<%= link_to t('edit'), edit_client_path(@client) %> |
-<%= link_to t('back'), clients_path %>
+              <%= label_tag :rg, "RG:", class:"col-sm-1 col-form-label fw-bold" %>
+              <div class="col-sm-2">
+                <%= label_tag :rg, @client.rg, class:"form-control-plaintext" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <%= label_tag :birthday, "Birthday:", class:"col-sm-2 col-form-label fw-bold" %>
+              <div class="col-sm-2">
+                <%= label_tag :birthday, date_br(@client.birthday), class:"form-control-plaintext" %>
+              </div>
+
+              <%= label_tag :phone, "Phone:", class:"col-sm-1 col-form-label fw-bold" %>
+              <div class="col-sm-2">
+                <%= label_tag :phone, @client.fone, class:"form-control-plaintext" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <%= label_tag :type_payment, "Type Payment:", class:"col-sm-2 col-form-label fw-bold" %>
+              <div class="col-sm-2">
+                <%= label_tag :type_payment, @client.type_payment, class:"form-control-plaintext" %>
+              </div>
+
+              <%= label_tag :credit_limit, "Limit:", class:"col-sm-1 col-form-label fw-bold" %>
+              <div class="col-sm-1">
+                <%= label_tag :credit_limit, @client.credit_limit, class:"form-control-plaintext" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <%= label_tag :indication, "Indication:", class:"col-sm-2 col-form-label fw-bold" %>
+              <div class="col-sm-2">
+                <%= label_tag :indication, @client.indication, class:"form-control-plaintext" %>
+              </div>
+
+              <%= label_tag :status, "Status:", class:"col-sm-1 col-form-label fw-bold" %>
+              <div class="col-sm-2">
+                <%= label_tag :status, @client.status, class:"form-control-plaintext" %>
+              </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="home_address">
+
+         <div class="m-3 row g-3">
+          <div class="row">
+            <%= label_tag :home_address, "Address:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :home_address, @client.home_address + ', ' + @client.home_number, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :home_complement, "Complement:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :home_complement, @client.home_complement, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :home_district, "District:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :home_district, @client.home_district, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :home_city, "City:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :home_city, @client.home_city, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :home_state, "State:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :home_state, @client.home_state, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :home_zip, "Zip-Code:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :home_zip, @client.home_zip, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :home_link, "Link:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <% url_link = @client.home_link %>
+              <%= link_to url_link.truncate(60), url_link, target: "_blank"  %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="billing_address">
+ 
+        <div class="m-3 row g-3">
+          <div class="row">
+            <%= label_tag :billing_address, "Address:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :billing_address, @client.billing_address + ', ' + @client.billing_number, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :billing_complement, "Complement:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :billing_complement, @client.billing_complement, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :billing_district, "District:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :billing_district, @client.billing_district, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :billing_city, "City:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :billing_city, @client.billing_city, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :billing_state, "State:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :billing_state, @client.billing_state, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :billing_zip, "Zip-Code:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :billing_zip, @client.billing_zip, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :billing_link, "Link:", class:"col-sm-2 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <% url_link = @client.billing_link %>
+              <%= link_to url_link.truncate(60), url_link, target: "_blank"  %>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="references">
+
+        <div class="m-3 row g-3">
+
+          <div class="row">
+            <%= label_tag :references_one_name, "Name:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_one_name, @client.references_one_name, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :references_one_origin, "Origin:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_one_origin, @client.references_one_origin, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :references_one_phone, "Phone:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_one_phone, @client.references_one_phone, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :references_two_name, "Name:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_two_name, @client.references_two_name, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :references_two_origin, "Origin:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_two_origin, @client.references_two_origin, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :references_two_phone, "Phone:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_two_phone, @client.references_two_phone, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <%= label_tag :references_three_name, "Name:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_three_name, @client.references_three_name, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :references_three_origin, "Origin:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_three_origin, @client.references_three_origin, class:"form-control-plaintext" %>
+            </div>
+
+            <%= label_tag :references_three_phone, "Phone:", class:"col-sm-1 col-form-label fw-bold" %>
+            <div class="col-sm-2">
+              <%= label_tag :references_three_phone, @client.references_three_phone, class:"form-control-plaintext" %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <%= link_to t('edit'), edit_client_path(@client) %> |
+    <%= link_to t('back'), clients_path %>
+  </div>
+
+  </div>
+</div>
+
+
+
+
