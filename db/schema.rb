@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_10_181003) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_13_112459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -113,11 +113,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_181003) do
     t.decimal "price", precision: 9, scale: 2, null: false
     t.date "date_payment"
     t.decimal "value_payment"
-    t.decimal "delay", precision: 9, scale: 2, null: false
+    t.decimal "delay", precision: 9, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "note"
-    t.decimal "residue", precision: 9, scale: 2, default: "0.0"
+    t.decimal "residue", precision: 9, scale: 2
     t.index ["advance_id"], name: "index_item_advances_on_advance_id"
   end
 
