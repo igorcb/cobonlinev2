@@ -1,1 +1,1 @@
-json.partial! "holidays/holiday", holiday: @holiday
+json.partial! 'holidays/holiday', holiday: @holiday

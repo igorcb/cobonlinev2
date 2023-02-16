@@ -1,15 +1,15 @@
 class CurrentAccountsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_current_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_account, only: %i[show edit update destroy]
 
   def launch_current
     price = params[:price]
-    CurrentAccount.create!(city_id: 1, 
-                           cost_id: CurrentAccount::TypeCost::RECEBIMENTO_COBRANCA, 
-                    date_ocurrence: Date.today, 
-                      type_launche: CurrentAccount::TypeLaunche::CREDITO, 
-                             price: price, 
-                          historic: "RECEBIMENO DE COBRANÇA AUTOMATICO")
+    CurrentAccount.create!(city_id: 1,
+                           cost_id: CurrentAccount::TypeCost::RECEBIMENTO_COBRANCA,
+                           date_ocurrence: Time.zone.today,
+                           type_launche: CurrentAccount::TypeLaunche::CREDITO,
+                           price: price,
+                           historic: 'RECEBIMENO DE COBRANÇA AUTOMATICO')
     redirect_to index_user_operator_current_accounts_path
   end
 
@@ -20,8 +20,8 @@ class CurrentAccountsController < ApplicationController
       @query = CurrentAccount.where(city_id: current_user.city_id)
       @q = @query.ransack(params[:q])
     end
-    @current_accounts = @q.result.paginate(:page => params[:page]).order(date_ocurrence: :desc)
-  end  
+    @current_accounts = @q.result.paginate(page: params[:page]).order(date_ocurrence: :desc)
+  end
 
   # GET /current_accounts
   # GET /current_accounts.json
@@ -32,7 +32,7 @@ class CurrentAccountsController < ApplicationController
       @query = CurrentAccount.where(city_id: current_user.city_id)
       @q = @query.ransack(params[:q])
     end
-    @current_accounts = @q.result.paginate(:page => params[:page]).order(date_ocurrence: :desc)
+    @current_accounts = @q.result.paginate(page: params[:page]).order(date_ocurrence: :desc)
   end
 
   def index_user_operator
@@ -41,8 +41,7 @@ class CurrentAccountsController < ApplicationController
 
   # GET /current_accounts/1
   # GET /current_accounts/1.json
-  def show
-  end
+  def show; end
 
   # GET /current_accounts/new
   def new
@@ -50,8 +49,7 @@ class CurrentAccountsController < ApplicationController
   end
 
   # GET /current_accounts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /current_accounts
   # POST /current_accounts.json
@@ -94,13 +92,14 @@ class CurrentAccountsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_current_account
-      @current_account = CurrentAccount.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def current_account_params
-      params.require(:current_account).permit(:city_id, :cost_id, :date_ocurrence, :type_launche, :price, :historic)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_current_account
+    @current_account = CurrentAccount.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def current_account_params
+    params.require(:current_account).permit(:city_id, :cost_id, :date_ocurrence, :type_launche, :price, :historic)
+  end
 end

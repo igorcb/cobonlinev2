@@ -1,13 +1,12 @@
 class ItemAdvancesController < ApplicationController
   before_action :authenticate_user!
-  #respond_to :html
 
   def index
-    if current_user.admin?
-      @item_advances = ItemAdvance.item_admin
-    else
-      @item_advances = ItemAdvance.items_operator(current_user) 
-    end
+    @item_advances = if current_user.admin?
+                       ItemAdvance.item_admin
+                     else
+                       ItemAdvance.items_operator(current_user)
+                     end
   end
 
   def edit
@@ -16,80 +15,48 @@ class ItemAdvancesController < ApplicationController
 
   def update
     @item_advance = ItemAdvance.find(params[:id])
-  
+
     if params[:value_payment].blank?
       if current_user.admin?
-        redirect_to edit_item_advance_path(@item_advance), :flash => { :alert => "Informe o valor da parcela" } 
+        redirect_to edit_item_advance_path(@item_advance), flash: { alert: 'Informe o valor da parcela' }
       else
-        redirect_to item_advances_path, :flash => { :alert => "Informe o valor da parcela" } 
+        redirect_to item_advances_path, flash: { alert: 'Informe o valor da parcela' }
       end
-      return
-    else 
-      if current_user.admin?
-        date_payment = params[:date_payment]
-      else
-        date_payment = Date.current.to_s
-      end
+      nil
+    else
+      date_payment = if current_user.admin?
+                       params[:date_payment]
+                     else
+                       Date.current.to_s
+                     end
 
       value_payment = params[:value_payment]
-      #TODO: Adicionar a nota/observação no servico onde efetua a baixa
+      # TODO: Adicionar a nota/observação no servico onde efetua a baixa
       note = params[:note]
 
       if ItemAdvances::PayParcel.new(@item_advance, date_payment.to_date, value_payment.to_f, note).call
-          respond_to do |format|
+        respond_to do |format|
+          flash[:notice] = 'Parcela foi atualizada com sucesso.'
           if current_user.admin?
-            flash[:notice] = "Parcela foi atualizada com sucesso."
             format.html { redirect_to advance_path(@item_advance.advance) }
           else
-            flash[:notice] = "Parcela foi atualizada com sucesso."
             format.html { redirect_to item_advances_path }
           end
         end
+      elsif current_user.admin?
+        redirect_to edit_item_advance_path(@item_advance),
+                    flash: { alert: 'Ocorreu um erro ao efetuar a baixa da parcela' }
       else
-        if current_user.admin?
-          redirect_to edit_item_advance_path(@item_advance), :flash => { :alert => "Ocorreu um erro ao efetuar a baixa da parcela" } 
-        else
-          redirect_to item_advances_path, :flash => { :alert => "Ocorreu um erro ao efetuar a baixa da parcela" } 
-        end
+        redirect_to item_advances_path, flash: { alert: 'Ocorreu um erro ao efetuar a baixa da parcela' }
       end
-    end 
-   
-    # respond_to do |format|
-    #   updated = false
-    #   if current_user.admin?
-    #     updated = @item_advance.update(date_payment: params[:date_payment], value_payment: params[:value_payment], note: params[:note]) 
-    #   else
-    #     updated = @item_advance.update(date_payment: Date.current.to_s, value_payment: params[:value_payment], note: params[:note]) 
-    #   end
-    #   if updated
-    #     @item_advance.baixa_parcela(Date.current.to_s, params[:value_payment].to_f)
-    #     if current_user.admin? 
-    #       flash[:notice] = "Parcela foi atualizada com sucesso."
-    #       format.html { redirect_to advance_path(@item_advance.advance) }
-    #     else
-    #       flash[:notice] = "Parcela foi atualizada com sucesso."
-    #       format.html { redirect_to item_advances_path }
-    #     end
-    #   else
-    #     format.html { render action: 'edit' }
-    #   end
-    # end
-  end  
+    end
+  end
 
   def destroy
-    # @item_advance = ItemAdvance.find(params[:id])
-    # advance = @item_advance.advance
     @item_advance.destroy
     respond_to do |format|
       format.html { redirect_to advance, notice: 'ItemAdvance destroyed was successfully.' }
       format.json { head :no_content }
     end
-  end  
-
-  #private
-    # def advance_params
-    #   #params.require(:advance).permit(:date_advance, :client_id, :price, :balance, :number_parts, :percent)
-    #   params.require(:item_advance).permit(:value_payment, :date_payment, :note)
-    # end
-
+  end
 end

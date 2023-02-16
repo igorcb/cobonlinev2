@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-City.create(name: "ROUTE 01")
-Cost.create(name: "PAGAMENTO_EMPRESTIMO")
-Cost.create(name: "RECEBIMENTO_COBRANCA")
-TypeTrade.create(name: "GENERAL")
+City.create(name: 'ROUTE 01')
+Cost.create(name: 'PAGAMENTO_EMPRESTIMO')
+Cost.create(name: 'RECEBIMENTO_COBRANCA')
+TypeTrade.create(name: 'GENERAL')

@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def user_admin
-    unless current_user.admin?
-      flash[:warning] = 'You have no access to users'
-      redirect_to(item_advances_path)
-    end
+    return if current_user.admin?
+
+    flash[:warning] = 'You have no access to users'
+    redirect_to(item_advances_path)
   end
 end

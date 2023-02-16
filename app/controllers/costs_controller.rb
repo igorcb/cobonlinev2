@@ -1,6 +1,6 @@
 class CostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_cost, only: [:show, :edit, :update, :destroy]
+  before_action :set_cost, only: %i[show edit update destroy]
 
   # GET /costs
   # GET /costs.json
@@ -10,8 +10,7 @@ class CostsController < ApplicationController
 
   # GET /costs/1
   # GET /costs/1.json
-  def show
-  end
+  def show; end
 
   # GET /costs/new
   def new
@@ -19,8 +18,7 @@ class CostsController < ApplicationController
   end
 
   # GET /costs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /costs
   # POST /costs.json
@@ -63,13 +61,14 @@ class CostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cost
-      @cost = Cost.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cost_params
-      params.require(:cost).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cost
+    @cost = Cost.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def cost_params
+    params.require(:cost).permit(:name)
+  end
 end

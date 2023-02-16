@@ -1,1 +1,1 @@
-json.partial! "advances/advance", advance: @advance
+json.partial! 'advances/advance', advance: @advance

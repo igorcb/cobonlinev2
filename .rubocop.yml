@@ -1,0 +1,61 @@
+require:
+  - 'rubocop-performance'
+  - 'rubocop-rails'
+  - 'rubocop-rspec'
+
+AllCops:
+  DefaultFormatter: fuubar
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  NewCops: enable
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+
+Metrics: # habilitado apenas no Code Climate
+  Enabled: false    
+
+Style/Documentation:
+  Enabled: false  
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+### rubocop-performance
+Performance/MapCompact:
+  Enabled: false
+
+### RSpec convention
+
+RSpec/Rails/InferredSpecType:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false  
+
+RSpec/ExampleLength:
+  Enabled: false
+
+### Rails convention
+Rails/HelperInstanceVariable:
+  Enabled: false
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false #TODO: Revisar esse padrão para criar indices no banco corretamente
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false #TODO: Revisar esse padrão para apagar dependencias de registros 
+  #exemplo: Client.destroy não apagar os emprestimos
+  #Model Client
+  #has_many: advances, dependent: :destroy
+
+Rails/I18nLocaleTexts:
+  Enabled: false  #TODO: Revisar esse padrão

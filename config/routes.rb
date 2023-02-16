@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  match "/get_client_for_city", :controller => "advances", :action => "get_client_for_city", via: [:get]
+  match "/client_for_city", :controller => "advances", :action => "client_for_city", via: [:get]
   match '/dashboard',  to: 'static_pages#dashboard',         via: 'get'
 
   get "static_pages/index"  

@@ -1,17 +1,17 @@
 class AdvancesController < ApplicationController
   before_action :authenticate_user!
   before_action :user_admin
-  before_action :set_advance, only: [:show, :edit, :update, :destroy, :recalculation, :print]
+  before_action :set_advance, only: %i[show edit update destroy recalculation print]
 
-  def get_client_for_city
-    #puts ">>>>>>>>>>>>>>>> cost_center_id: #{params[:cost_center_id].to_i}"
+  def client_for_city
+    # puts ">>>>>>>>>>>>>>>> cost_center_id: #{params[:cost_center_id].to_i}"
     city_id = params[:city_id].to_i
-    subs = Client.order_asc.where(:city_id => city_id)
+    subs = Client.order_asc.where(city_id: city_id)
     sub = []
     subs.each do |s|
-      sub << {:id => s.id, :n => s.name}
+      sub << { id: s.id, n: s.name }
     end
-    render :text => sub.to_json
+    render text: sub.to_json
   end
 
   # GET /advances
@@ -23,8 +23,7 @@ class AdvancesController < ApplicationController
 
   # GET /advances/1
   # GET /advances/1.json
-  def show
-  end
+  def show; end
 
   # GET /advances/new
   def new
@@ -33,10 +32,10 @@ class AdvancesController < ApplicationController
 
   # GET /advances/1/edit
   def edit
-    if @advance.has_paid?
-      redirect_to advances_path, :flash => { :alert => "Emprestimo com paracelas pagas, não é possível editar." } 
-      return
-    end
+    return unless @advance.paid?
+
+    redirect_to advances_path, flash: { alert: 'Emprestimo com paracelas pagas, não é possível editar.' }
+    nil
   end
 
   # POST /advances
@@ -65,7 +64,7 @@ class AdvancesController < ApplicationController
         format.html { redirect_to @advance, notice: 'Advance was successfully updated.' }
         format.json { render :show, status: :ok, location: @advance }
       else
-        redirect_to advances_path, :flash => { :alert => "Ocorreu um erro ao editar o emprestimo, tente novamente." } 
+        redirect_to advances_path, flash: { alert: 'Ocorreu um erro ao editar o emprestimo, tente novamente.' }
         return
       end
     end
@@ -74,8 +73,8 @@ class AdvancesController < ApplicationController
   # DELETE /advances/1
   # DELETE /advances/1.json
   def destroy
-    if @advance.has_paid?
-      redirect_to advances_path, :flash => { :alert => "Emprestimo com paracelas pagas, não é possível excluir." } 
+    if @advance.paid?
+      redirect_to advances_path, flash: { alert: 'Emprestimo com paracelas pagas, não é possível excluir.' }
       return
     end
 
@@ -87,25 +86,26 @@ class AdvancesController < ApplicationController
   end
 
   def recalculation
-    puts ">>>>>>>>>>>>>>> Recalculation Advance ID: #{@advance.id}"
+    Rails.logger.debug { ">>>>>>>>>>>>>>> Recalculation Advance ID: #{@advance.id}" }
     @advance.recalculation
     redirect_to advances_path
   end
 
   def print
     pdf = AdvancePrint.new(@advance)
-   
+
     send_data(pdf.render, filename: "Advance_#{@advance.id}.pdf", type: 'application/pdf', disposition: 'inline')
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_advance
-      @advance = Advance.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def advance_params
-      params.require(:advance).permit(:date_advance, :client_id, :price, :number_parts, :percent, :observation)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_advance
+    @advance = Advance.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def advance_params
+    params.require(:advance).permit(:date_advance, :client_id, :price, :number_parts, :percent, :observation)
+  end
 end
