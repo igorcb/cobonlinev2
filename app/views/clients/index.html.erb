@@ -21,7 +21,7 @@
         <td><%= client.name %></td>
         <td><%= client.fone %></td>
         <td><%= client.credit_limit %></td>
-        <td><%= client.status %></td>
+        <td><%= Client.human_enum_name(:status, client.status.to_sym) %></td>
         <td><%= link_to t('show'), client %></td>
         <td><%= link_to t('edit'), edit_client_path(client) %></td>
         <td><%= link_to t('destroy'), client, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></td>

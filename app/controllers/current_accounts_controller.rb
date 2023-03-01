@@ -58,7 +58,7 @@ class CurrentAccountsController < ApplicationController
 
     respond_to do |format|
       if @current_account.save
-        format.html { redirect_to @current_account, notice: 'Current account was successfully created.' }
+        format.html { redirect_to @current_account, notice: notice_message(:create_successfully) }
         format.json { render :show, status: :created, location: @current_account }
       else
         format.html { render :new }
@@ -72,7 +72,7 @@ class CurrentAccountsController < ApplicationController
   def update
     respond_to do |format|
       if @current_account.update(current_account_params)
-        format.html { redirect_to @current_account, notice: 'Current account was successfully updated.' }
+        format.html { redirect_to @current_account, notice: notice_message(:update_successfully) }
         format.json { render :show, status: :ok, location: @current_account }
       else
         format.html { render :edit }
@@ -86,7 +86,7 @@ class CurrentAccountsController < ApplicationController
   def destroy
     @current_account.destroy
     respond_to do |format|
-      format.html { redirect_to current_accounts_url, notice: 'Current account was successfully destroyed.' }
+      format.html { redirect_to current_accounts_url, notice: notice_message(:destroy_successfully) }
       format.json { head :no_content }
     end
   end

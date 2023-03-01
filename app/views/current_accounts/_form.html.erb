@@ -24,8 +24,8 @@
     </div>
   <% end %>
   <div class="form-group">
-    <%= f.label :cost_id %><br>
-    <%= f.select(:cost_id, Cost.order(:name).collect {|c| [c.name, c.id]}, {include_blank: "Select Cost"}, {class: "form-control"} )%>
+    <%= f.label :cost_id %><br>                                                            
+    <%= f.select(:cost_id, Cost.order(:name).collect {|c| [c.name, c.id]}, {include_blank:  t("helpers.select.cost")}, {class: "form-control"} )%>
   </div>
   <div class="form-group">
     <%= f.label :date_ocurrence, "Data" %><br>

@@ -23,7 +23,7 @@ class TypeTradesController < ApplicationController
 
     respond_to do |format|
       if @type_trade.save
-        format.html { redirect_to type_trade_url(@type_trade), notice: 'Type trade was successfully created.' }
+        format.html { redirect_to type_trade_url(@type_trade), notice: notice_message(:create_successfully) }
         format.json { render :show, status: :created, location: @type_trade }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -36,7 +36,7 @@ class TypeTradesController < ApplicationController
   def update
     respond_to do |format|
       if @type_trade.update(type_trade_params)
-        format.html { redirect_to type_trade_url(@type_trade), notice: 'Type trade was successfully updated.' }
+        format.html { redirect_to type_trade_url(@type_trade), notice: notice_message(:update_successfully) }
         format.json { render :show, status: :ok, location: @type_trade }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,7 +50,7 @@ class TypeTradesController < ApplicationController
     @type_trade.destroy
 
     respond_to do |format|
-      format.html { redirect_to type_trades_url, notice: 'Type trade was successfully destroyed.' }
+      format.html { redirect_to type_trades_url, notice: notice_message(:destroy_successfully) }
       format.json { head :no_content }
     end
   end
