@@ -30,58 +30,58 @@
       <div class="tab-pane fade show active" id="home">
         <div class="m-3 row g-3">
           <div class="col-sm-12">
-            <%= f.label :type_trade_id, "Type of Trade" %><br>
+            <%= f.label :type_trade_id, Client.human_attribute_name('type_trade') %><br>
             <%= f.select( :type_trade_id, TypeTrade.order(:name).collect {|c| [c.name, c.id]} , {include_blank: true}, {class: "form-select"} )%>
           </div>
 
           <div class="col-sm-12">
-            <%= f.label :city_id, "Route" %><br>
+            <%= f.label :city_id, Client.human_attribute_name('route') %><br>
             <%= f.select( :city_id, City.order(:name).collect {|c| [c.name, c.id]} , {include_blank: true}, {class: "form-select"} )%>
           </div>
 
           <div class="col-sm-12">
-            <%= f.label :name %><br>
+            <%= f.label :name, Client.human_attribute_name('name') %><br>
             <%= f.text_field :name, {class: "form-control"} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :cpf %><br>
+            <%= f.label :cpf, Client.human_attribute_name('cpf') %><br>
             <%= f.text_field :cpf, {class: "form-control"} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :rg %><br>
+            <%= f.label :rg, Client.human_attribute_name('rg') %><br>
             <%= f.text_field :rg, {class: "form-control"} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :birthday %><br>
+            <%= f.label :birthday, Client.human_attribute_name('birthday') %><br>
             <%= f.text_field :birthday, {class: "form-control"} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :fone %><br>
+            <%= f.label :fone, Client.human_attribute_name('phone') %><br>
             <%= f.text_field :fone, {class: "form-control"} %>
           </div>
 
           <div class="col-sm-12">
-            <%= f.label :type_payment %><br>
-            <%= f.select :type_payment, [["daily", "daily"], ["fortnightly", "fortnightly"], ["monthly", "monthly"]], {include_blank: true}, {class: "form-select"} %>
+            <%= f.label :type_payment, Client.human_attribute_name('type_payment') %><br>
+            <%= f.select :type_payment, Client.type_payments.keys.collect { |payment| [Client.human_enum_name(:type_payment, payment), payment] }, {include_blank: true}, {class: "form-select"} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :credit_limit %><br>
+            <%= f.label :credit_limit, Client.human_attribute_name('credit_limit') %><br>
             <%= f.text_field :credit_limit, {class: "form-control"} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :indication %><br>
+            <%= f.label :indication, Client.human_attribute_name('indication') %><br>
             <%= f.text_field :indication, {class: "form-control"} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :status %><br>
-            <%= f.select :status, [["active", "active"], ["inactive", "inactive"]], {include_blank: true}, {class: "form-select"} %>
+            <%= f.label :status, Client.human_attribute_name('status') %><br>
+            <%= f.select :status, Client.statuses.keys.collect { |status| [Client.human_enum_name(:status, status), status] }, {include_blank: true}, {class: "form-select"} %>
           </div>
 
         </div>
@@ -91,42 +91,42 @@
       <div class="tab-pane fade" id="home_address">
         <div class="m-3 row g-3">
           <div class="col-sm-9">
-            <%= f.label :home_address, "Address" %><br>
-            <%= f.text_field :home_address, {class: "form-control", placeholder: "Address", aria: { label: "Home Address" }} %>
+            <%= f.label :home_address, Client.human_attribute_name('home_address') %><br>
+            <%= f.text_field :home_address, {class: "form-control", placeholder: Client.human_attribute_name('home_address'), aria: { label: "Home Address" }} %>
           </div>
 
           <div class="col-sm">
-            <%= f.label :home_number, "Number" %><br>
-            <%= f.text_field :home_number, {class: "form-control", placeholder: "Number", aria: { label: "Home Number" }} %>
+            <%= f.label :home_number, Client.human_attribute_name('home_number') %><br>
+            <%= f.text_field :home_number, {class: "form-control", placeholder: Client.human_attribute_name('home_number'), aria: { label: "Home Number" }} %>
           </div>
 
           <div class="col-sm-5">
-            <%= f.label :home_complement, "Complement" %><br>
-            <%= f.text_field :home_complement, {class: "form-control", placeholder: "Complement", aria: { label: "Home Complement" }} %>
+            <%= f.label :home_complement, Client.human_attribute_name('home_complement') %><br>
+            <%= f.text_field :home_complement, {class: "form-control", placeholder: Client.human_attribute_name('home_complement'), aria: { label: "Home Complement" }} %>
           </div>
 
           <div class="col-sm-7">
-            <%= f.label :home_district, "District" %><br>
-            <%= f.text_field :home_district, {class: "form-control", placeholder: "District", aria: { label: "Home District" }} %>
+            <%= f.label :home_district, Client.human_attribute_name('home_district') %><br>
+            <%= f.text_field :home_district, {class: "form-control", placeholder: Client.human_attribute_name('home_district'), aria: { label: "Home District" }} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :home_city, "City" %><br>
-            <%= f.text_field :home_city, {class: "form-control", placeholder: "City", aria: { label: "Home City" }} %>
+            <%= f.label :home_city, Client.human_attribute_name('home_city') %><br>
+            <%= f.text_field :home_city, {class: "form-control", placeholder: Client.human_attribute_name('home_city'), aria: { label: "Home City" }} %>
           </div>
 
           <div class="col-sm-3">
-            <%= f.label :home_state, "State" %><br>
-            <%= f.text_field :home_state, {class: "form-control", placeholder: "State", aria: { label: "Home State" }} %>
+            <%= f.label :home_state, Client.human_attribute_name('home_state') %><br>
+            <%= f.text_field :home_state, {class: "form-control", placeholder: Client.human_attribute_name('home_state'), aria: { label: "Home State" }} %>
           </div>
 
           <div class="col-sm-3">
-            <%= f.label :home_zip, "Zip-Code" %><br>
-            <%= f.text_field :home_zip, {class: "form-control", placeholder: "Zip-Code", aria: { label: "Home Zip-Code" }} %>
+            <%= f.label :home_zip, Client.human_attribute_name('home_zip') %><br>
+            <%= f.text_field :home_zip, {class: "form-control", placeholder: Client.human_attribute_name('home_zip'), aria: { label: "Home Zip-Code" }} %>
           </div>
 
           <div class="col-sm-12">
-            <%= f.label :home_link, "Link" %><br>
+            <%= f.label :home_link, Client.human_attribute_name('home_link') %><br>
             <%= f.text_field :home_link, {class: "form-control", placeholder: "Link", aria: { label: "Home Link Address" }} %>
           </div>
         </div>
@@ -135,43 +135,43 @@
       <div class="tab-pane fade" id="billing_address">
         <div class="m-3 row g-3">
           <div class="col-sm-9">
-            <%= f.label :billing_address, "Address" %><br>
-            <%= f.text_field :billing_address, {class: "form-control", placeholder: "Address", aria: { label: "Billing Address" }} %>
+            <%= f.label :billing_address, Client.human_attribute_name('billing_address') %><br>
+            <%= f.text_field :billing_address, {class: "form-control", placeholder: Client.human_attribute_name('billing_address'), aria: { label: "Billing Address" }} %>
           </div>
 
           <div class="col-sm">
-            <%= f.label :billing_number, "Number" %><br>
-            <%= f.text_field :billing_number, {class: "form-control", placeholder: "Number", aria: { label: "Billing Number" }} %>
+            <%= f.label :billing_number, Client.human_attribute_name('billing_number') %><br>
+            <%= f.text_field :billing_number, {class: "form-control", placeholder: Client.human_attribute_name('billing_number'), aria: { label: "Billing Number" }} %>
           </div>
 
           <div class="col-sm-5">
-            <%= f.label :billing_complement, "Complement" %><br>
-            <%= f.text_field :billing_complement, {class: "form-control", placeholder: "Complement", aria: { label: "Billing Complement" }} %>
+            <%= f.label :billing_complement, Client.human_attribute_name('billing_complement') %><br>
+            <%= f.text_field :billing_complement, {class: "form-control", placeholder: Client.human_attribute_name('billing_complement'), aria: { label: "Billing Complement" }} %>
           </div>
 
           <div class="col-sm-7">
-            <%= f.label :billing_district, "District" %><br>
-            <%= f.text_field :billing_district, {class: "form-control", placeholder: "District", aria: { label: "Billing District" }} %>
+            <%= f.label :billing_district, Client.human_attribute_name('billing_district') %><br>
+            <%= f.text_field :billing_district, {class: "form-control", placeholder: Client.human_attribute_name('billing_district'), aria: { label: "Billing District" }} %>
           </div>
 
           <div class="col-sm-6">
-            <%= f.label :billing_city, "City" %><br>
-            <%= f.text_field :billing_city, {class: "form-control", placeholder: "City", aria: { label: "Billing City" }} %>
+            <%= f.label :billing_city, Client.human_attribute_name('billing_city') %><br>
+            <%= f.text_field :billing_city, {class: "form-control", placeholder: Client.human_attribute_name('billing_city'), aria: { label: "Billing City" }} %>
           </div>
 
           <div class="col-sm-3">
-            <%= f.label :billing_state, "State" %><br>
-            <%= f.text_field :billing_state, {class: "form-control", placeholder: "State", aria: { label: "Billing State" }} %>
+            <%= f.label :billing_state, Client.human_attribute_name('billing_state') %><br>
+            <%= f.text_field :billing_state, {class: "form-control", placeholder: Client.human_attribute_name('billing_state'), aria: { label: "Billing State" }} %>
           </div>
 
           <div class="col-sm-3">
-            <%= f.label :billing_zip, "Zip-Code" %><br>
-            <%= f.text_field :billing_zip, {class: "form-control", placeholder: "Zip-Code", aria: { label: "Billing Zip-Code" }} %>
+            <%= f.label :billing_zip, Client.human_attribute_name('billing_zip') %><br>
+            <%= f.text_field :billing_zip, {class: "form-control", placeholder: Client.human_attribute_name('billing_zip'), aria: { label: "Billing Zip-Code" }} %>
           </div>
 
           <div class="col-sm-12">
-            <%= f.label :billing_link, "Link" %><br>
-            <%= f.text_field :billing_link, {class: "form-control", placeholder: "Link", aria: { label: "Billing Link Address" }} %>
+            <%= f.label :billing_link, Client.human_attribute_name('billing_link') %><br>
+            <%= f.text_field :billing_link, {class: "form-control", placeholder: Client.human_attribute_name('billing_link'), aria: { label: "Billing Link Address" }} %>
           </div>
         </div>
       </div>
@@ -179,48 +179,48 @@
       <div class="tab-pane fade" id="references">
         <div class="m-3 row g-3">
           <div class="col-sm-4">
-            <%= f.label :references_one_name, "Nome" %><br>
-            <%= f.text_field :references_one_name, {class: "form-control", placeholder: "Nome", aria: { label: "References One Name" }} %>
+            <%= f.label :references_one_name, Client.human_attribute_name('references_one_name') %><br>
+            <%= f.text_field :references_one_name, {class: "form-control", placeholder: Client.human_attribute_name('references_one_name'), aria: { label: "References One Name" }} %>
           </div>
 
           <div class="col-sm-4">
-            <%= f.label :references_one_origin, "Origin" %><br>
-            <%= f.text_field :references_one_origin, {class: "form-control", placeholder: "Origin", aria: { label: "References One Origin" }} %>
+            <%= f.label :references_one_origin, Client.human_attribute_name('references_one_origin') %><br>
+            <%= f.text_field :references_one_origin, {class: "form-control", placeholder: Client.human_attribute_name('references_one_origin'), aria: { label: "References One Origin" }} %>
           </div>
 
           <div class="col-sm-4">
-            <%= f.label :references_one_phone, "Phone" %><br>
-            <%= f.text_field :references_one_phone, {class: "form-control", placeholder: "Phone", aria: { label: "References One Phone" }} %>
+            <%= f.label :references_one_phone, Client.human_attribute_name('references_one_phone') %><br>
+            <%= f.text_field :references_one_phone, {class: "form-control", placeholder: Client.human_attribute_name('references_one_phone'), aria: { label: "References One Phone" }} %>
           </div>
 
           <div class="col-sm-4">
-            <%= f.label :references_two_name, "Nome" %><br>
-            <%= f.text_field :references_two_name, {class: "form-control", placeholder: "Nome", aria: { label: "References Two Name" }} %>
+            <%= f.label :references_two_name, Client.human_attribute_name('references_two_name') %><br>
+            <%= f.text_field :references_two_name, {class: "form-control", placeholder: Client.human_attribute_name('references_two_name'), aria: { label: "References Two Name" }} %>
           </div>
 
           <div class="col-sm-4">
-            <%= f.label :references_two_origin, "Origin" %><br>
-            <%= f.text_field :references_two_origin, {class: "form-control", placeholder: "Origin", aria: { label: "References Two Origin" }} %>
+            <%= f.label :references_two_origin, Client.human_attribute_name('references_two_origin') %><br>
+            <%= f.text_field :references_two_origin, {class: "form-control", placeholder: Client.human_attribute_name('references_two_origin'), aria: { label: "References Two Origin" }} %>
           </div>
 
           <div class="col-sm-4">
-            <%= f.label :references_two_phone, "Phone" %><br>
-            <%= f.text_field :references_two_phone, {class: "form-control", placeholder: "Phone", aria: { label: "References Two Phone" }} %>
+            <%= f.label :references_two_phone, Client.human_attribute_name('references_two_phone') %><br>
+            <%= f.text_field :references_two_phone, {class: "form-control", placeholder: Client.human_attribute_name('references_two_phone'), aria: { label: "References Two Phone" }} %>
           </div>
 
           <div class="col-sm-4">
-            <%= f.label :references_three_name, "Nome" %><br>
-            <%= f.text_field :references_three_name, {class: "form-control", placeholder: "Nome", aria: { label: "References Three Name" }} %>
+            <%= f.label :references_three_name, Client.human_attribute_name('references_three_name') %><br>
+            <%= f.text_field :references_three_name, {class: "form-control", placeholder: Client.human_attribute_name('references_three_name'), aria: { label: "References Three Name" }} %>
           </div>
 
           <div class="col-sm-4">
-            <%= f.label :references_three_origin, "Origin" %><br>
-            <%= f.text_field :references_three_origin, {class: "form-control", placeholder: "Origin", aria: { label: "References Three Origin" }} %>
+            <%= f.label :references_three_origin, Client.human_attribute_name('references_three_origin') %><br>
+            <%= f.text_field :references_three_origin, {class: "form-control", placeholder: Client.human_attribute_name('references_three_origin'), aria: { label: "References Three Origin" }} %>
           </div>
 
           <div class="col-sm-4">
-            <%= f.label :references_three_phone, "Phone" %><br>
-            <%= f.text_field :references_three_phone, {class: "form-control", placeholder: "Phone", aria: { label: "References Three Phone" }} %>
+            <%= f.label :references_three_phone, Client.human_attribute_name('references_three_phone') %><br>
+            <%= f.text_field :references_three_phone, {class: "form-control", placeholder: Client.human_attribute_name('references_three_phone'), aria: { label: "References Three Phone" }} %>
           </div>
 
         </div>

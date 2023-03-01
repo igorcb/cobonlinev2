@@ -2,38 +2,38 @@
 <% if current_user.admin? %>
   <%= form_for(@item_advance) do |f| %>
     <strong>Cliente: </strong> <%= @item_advance.client.name %> <br />
-    <strong>Dt Empres: </strong> <%= @item_advance.advance.date_advance.to_s %> <br />
+    <strong>Dt Empres: </strong> <%= date_br(@item_advance.advance.date_advance) %> <br />
     <strong>Parcela: </strong> <%= @item_advance.parts %> <br />
-    <strong>Vencimento: </strong> <%= @item_advance.due_date.to_s %> <br />
+    <strong>Vencimento: </strong> <%= date_br(@item_advance.due_date) %> <br />
     <strong>Valor:</strong> <%= @item_advance.price.to_f %> <br />
     <strong>Saldo Devedor:</strong> <%= @item_advance.advance.balance.to_f %> <br />
   
     <hr>
     
     <div class="mb-3">
-      <%= label_tag :date_payment, "Data Pagamento", class: "form-label" %>
+      <%= label_tag :date_payment, ItemAdvance.human_attribute_name('date_payment'), class: "form-label" %>
       <%= text_field_tag :date_payment, nil, value: date_br(DateTime.now), class: "form-control" %>
     </div>
 
     <div class="mb-3">
-      <%= label_tag :value_payment, "Valor Pago", class: "form-label" %>
+      <%= label_tag :value_payment, ItemAdvance.human_attribute_name('value_payment'), class: "form-label" %>
       <%= text_field_tag :value_payment, nil, class: "form-control" %>
     </div>
 
     <div class="mb-3">
-      <%= label_tag :note, "Note", class: "form-label" %>
+      <%= label_tag :note, ItemAdvance.human_attribute_name('note'), class: "form-label" %>
       <%= text_field_tag :note, @item_advance.note, class: "form-control" %>
     </div>
 
-    <%= f.submit "Baixar", class: "btn btn-primary" %>
+    <%= f.submit t(".pay"), class: "btn btn-primary" %>
 
   <% end %>
 <% else %>
   <%= form_for(@item_advance) do |f| %>
     <strong>Cliente: </strong> <%= @item_advance.client.name %> <br />
-    <strong>Dt Empres: </strong> <%= @item_advance.advance.date_advance.to_s %> <br />
+    <strong>Dt Empres: </strong> <%= date_br(@item_advance.advance.date_advance) %> <br />
     <strong>Parcela: </strong> <%= @item_advance.parts %> <br />
-    <strong>Vencimento: </strong> <%= @item_advance.due_date.to_s %> <br />
+    <strong>Vencimento: </strong> <%= date_br(@item_advance.due_date) %> <br />
     <strong>Valor:</strong> <%= @item_advance.price.to_f %> <br />
     <strong>Saldo Devedor:</strong> <%= @item_advance.advance.balance.to_f %> <br />
   

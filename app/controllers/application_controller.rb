@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
     flash[:warning] = 'You have no access to users'
     redirect_to(item_advances_path)
   end
+
+  def notice_message(message)
+    controller = I18n.t "links.#{controller_name}"
+    "#{controller.singularize} #{I18n.t message}"
+  end
 end

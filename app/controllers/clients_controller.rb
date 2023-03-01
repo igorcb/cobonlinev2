@@ -28,7 +28,9 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
-        format.html { redirect_to client_url(@client), notice: 'Client was successfully created.' }
+        format.html do
+          redirect_to client_url(@client), notice: notice_message(:create_successfully)
+        end
         format.json { render :show, status: :created, location: @client }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +44,9 @@ class ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update!(client_params)
-        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
+        format.html do
+          redirect_to @client, notice: notice_message(:update_successfully)
+        end
         format.json { render :show, status: :ok, location: @client }
       else
         format.html { render :edit }
@@ -56,7 +60,9 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     respond_to do |format|
-      format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
+      format.html do
+        redirect_to clients_url, notice: notice_message(:destroy_successfully)
+      end
       format.json { head :no_content }
     end
   end

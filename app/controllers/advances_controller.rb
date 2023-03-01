@@ -45,7 +45,7 @@ class AdvancesController < ApplicationController
 
     respond_to do |format|
       if @advance.save
-        format.html { redirect_to @advance, notice: 'Advance was successfully created.' }
+        format.html { redirect_to @advance, notice: notice_message(:create_successfully) }
         format.json { render :show, status: :created, location: @advance }
       else
         format.html { render :new }
@@ -61,7 +61,7 @@ class AdvancesController < ApplicationController
 
     respond_to do |format|
       if @advance.update_and_cache(advance_params, old_value)
-        format.html { redirect_to @advance, notice: 'Advance was successfully updated.' }
+        format.html { redirect_to @advance, notice: notice_message(:update_successfully) }
         format.json { render :show, status: :ok, location: @advance }
       else
         redirect_to advances_path, flash: { alert: 'Ocorreu um erro ao editar o emprestimo, tente novamente.' }
@@ -80,7 +80,7 @@ class AdvancesController < ApplicationController
 
     @advance.destroy
     respond_to do |format|
-      format.html { redirect_to advances_url, notice: 'Advance was successfully destroyed.' }
+      format.html { redirect_to advances_url, notice: notice_message(:destroy_successfully) }
       format.json { head :no_content }
     end
   end

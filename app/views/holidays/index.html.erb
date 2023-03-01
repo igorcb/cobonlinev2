@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1><%= t(".title") %></h1>
 
 <%= link_to t(".new"), new_holiday_path, class: "btn btn-primary btn-block" %> <br />
@@ -20,7 +18,7 @@
         <td><%= date_br(holiday.date_holiday) %></td>
         <td><%= link_to t('show'), holiday %></td>
         <td><%= link_to t('edit'), edit_holiday_path(holiday) %></td>
-        <td><%= link_to t('destroy'), holiday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('destroy'), holiday, data: {turbo_method: :delete, turbo_confirm: t("confirm")} %></td>
       </tr>
     <% end %>
   </tbody>

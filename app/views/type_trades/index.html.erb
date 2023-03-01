@@ -16,7 +16,7 @@
         <td><%= type_trade.name %></td>
         <td><%= link_to t('show'), type_trade %></td>
         <td><%= link_to t('edit'), edit_type_trade_path(type_trade) %></td>
-        <td><%= link_to t('destroy'), type_trade, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></td>
+        <td><%= link_to t('destroy'), type_trade, data: {turbo_method: :delete, turbo_confirm: t("confirm")} %></td>
       </tr>
     <% end %>
   </tbody>

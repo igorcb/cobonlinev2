@@ -37,4 +37,7 @@
 
 .byebug_history
 .env
+.development.env
+.production.env
+.test.env
 coverage
