@@ -3,8 +3,11 @@ require 'rails_helper'
 describe ItemAdvances::PayParcel do
   subject { described_class.new(parcel, date_payment, value_payment, note) }
 
-  Cost.destroy_all
-  create(:cost, id: 1, name: 'PAGAMENTO_EMPRESTIMO')
+  before do
+    Cost.destroy_all
+    create(:cost, id: 1, name: 'PAGAMENTO_EMPRESTIMO')
+  end
+
   let(:advance) { create(:advance, date_advance: '2023-02-03', price: 1000) }
   let(:note) { 'Lorem ipsum' }
 
