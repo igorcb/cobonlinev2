@@ -8,15 +8,8 @@ module ApplicationHelper
     end
   end
 
-  def nav_link(text, path)
-    options = current_page?(path) ? { class: 'active' } : {}
-    content_tag(:li, options) do
-      link_to t(text), path
-    end
-  end
-
   def date_br(date)
-    date.nil? ? '' : I18n.l(date, format: '%d/%m/%Y')
+    date.blank? ? '' : I18n.l(date, format: '%d/%m/%Y')
   end
 
   def select_credito_debito
